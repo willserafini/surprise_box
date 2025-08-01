@@ -22,6 +22,8 @@
       align-items: center;
       text-align: center;
       padding: 20px;
+      z-index: 2;
+      position: relative;
     }
 
     h1 {
@@ -78,22 +80,22 @@
 
     .heart {
       position: absolute;
+      bottom: -30px;
       color: #ff3366;
       font-size: 24px;
-      animation: float 6s infinite ease-in;
       opacity: 0.8;
+      animation: floatUp 6s linear forwards;
+      pointer-events: none;
+      z-index: 1;
     }
 
-    @keyframes float {
+    @keyframes floatUp {
       0% {
-        transform: translateY(100vh) scale(1);
-        opacity: 0;
-      }
-      50% {
+        transform: translateY(0) scale(1);
         opacity: 1;
       }
       100% {
-        transform: translateY(-10vh) scale(1.2);
+        transform: translateY(-100vh) scale(1.5);
         opacity: 0;
       }
     }
@@ -118,20 +120,27 @@
     btn.addEventListener('click', () => {
       btn.style.display = 'none';
       reveal.style.display = 'block';
-      launchHearts();
+      startHeartRain();
     });
 
-    function launchHearts() {
-      for (let i = 0; i < 30; i++) {
+    function startHeartRain() {
+      setInterval(() => {
         const heart = document.createElement('div');
-        heart.className = 'heart';
+        heart.classList.add('heart');
         heart.textContent = '💖';
+
+        // Posição e estilo aleatórios
         heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+        heart.style.fontSize = 16 + Math.random() * 24 + 'px';
+        heart.style.animationDuration = 3 + Math.random() * 5 + 's';
+
         document.body.appendChild(heart);
 
-        setTimeout(() => heart.remove(), 10000);
-      }
+        // Remover após a animação
+        setTimeout(() => {
+          heart.remove();
+        }, 8000);
+      }, 300); // Novos corações a cada 300ms
     }
   </script>
 </body>
