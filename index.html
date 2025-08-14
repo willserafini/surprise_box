@@ -21,7 +21,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 5px;
+      padding: 20px;
       z-index: 2;
       position: relative;
     }
@@ -34,14 +34,7 @@
 
     p {
       font-size: 1.2em;
-      margin: 10px 0 15px;
-    }
-
-    .special {
-      font-size: 1.3em;
-      font-weight: bold;
-      color: #ff3366;
-      margin-bottom: 20px;
+      margin: 10px 0 20px;
     }
 
     img {
@@ -114,8 +107,7 @@
 
     <div id="reveal">
       <h1>Eu te amo ❤️</h1>
-      <div class="special">Hoje completamos 2 meses juntos, e estou amando cada instante ao seu lado! 💕</div>
-
+      <p>Você faz meu mundo mais bonito.<br> Obrigado por estar ao meu lado. 🌅</p>
       <img src="foto.jpeg" alt="Nós dois juntinhos" />
       <footer>Com todo meu amor, Willian 💌</footer>
     </div>
@@ -136,12 +128,19 @@
         const heart = document.createElement('div');
         heart.classList.add('heart');
         heart.textContent = '💖';
+
+        // Posição e estilo aleatórios
         heart.style.left = Math.random() * 100 + 'vw';
         heart.style.fontSize = 16 + Math.random() * 24 + 'px';
         heart.style.animationDuration = 3 + Math.random() * 5 + 's';
+
         document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 8000);
-      }, 300);
+
+        // Remover após a animação
+        setTimeout(() => {
+          heart.remove();
+        }, 8000);
+      }, 300); // Novos corações a cada 300ms
     }
   </script>
 </body>
