@@ -102,6 +102,7 @@
   </style>
 </head>
 <body>
+  <audio id="myAudio" src="song.mp3" type="audio/mpeg"></audio>
   <div class="container">
     <button id="surpriseBtn">Toque aqui para uma surpresa 💝</button>
 
@@ -117,6 +118,12 @@
     const btn = document.getElementById('surpriseBtn');
     const reveal = document.getElementById('reveal');
 
+    const audio = document.getElementById("myAudio");
+
+    // start and end times in seconds
+    const startTime = 54;   // 0:54
+    const endTime   = 85;   // 1:25
+
     btn.addEventListener('click', () => {
       btn.style.display = 'none';
       reveal.style.display = 'block';
@@ -124,6 +131,18 @@
     });
 
     function startHeartRain() {
+      audio.currentTime = startTime;
+      audio.play();
+
+      // stop at end time
+      audio.addEventListener("timeupdate", () => {
+        if (audio.currentTime >= endTime) {
+          audio.pause();
+          audio.currentTime = startTime; // reset back to start
+          audio.play();
+        }
+      });
+
       setInterval(() => {
         const heart = document.createElement('div');
         heart.classList.add('heart');
